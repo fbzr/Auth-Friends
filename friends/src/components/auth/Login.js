@@ -126,8 +126,7 @@ const Login = withFormik({
             })
             .catch(err => {
                 setSubmitting(false);
-                console.log(err);
-                return setErrors({password: 'Username or Password incorrect. Please see Readme'})
+                return setErrors({password: err.response.data.error})
             })
     }
 })(LoginForm)
