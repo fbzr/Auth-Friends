@@ -112,7 +112,7 @@ const Login = withFormik({
             .min(8, 'Password must have at least 8 characters')
             .required('Password required')
     }),
-    handleSubmit: (data, { resetForm, setErrors, setSubmitting }) => {
+    handleSubmit: (data, { resetForm, setErrors, setSubmitting, props }) => {
         const { username, password } = data;
         const body = { username: username, password: password };
         // Log in 
@@ -122,7 +122,7 @@ const Login = withFormik({
                 const token = JSON.stringify(res.data.payload);
                 resetForm();
                 setSubmitting(false);
-                localStorage.setItem('token', token);
+                props.handleLogin(token);
             })
             .catch(err => {
                 setSubmitting(false);

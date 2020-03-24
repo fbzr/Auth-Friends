@@ -1,18 +1,25 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 // components
 import Login from './components/auth/Login';
 import FriendsList from './components/FriendsList';
 
 function App() {
+  const history = useHistory();
+
+  const handleLogin = token => {
+    localStorage.setItem('token', token);
+    history.push('/friends');
+  }
+
   return (
-    <Router>
+    <div>
       App
       <Route exact path='/login'>
-        <Login />
+        <Login handleLogin={handleLogin} />
       </Route>
       <Route exact path='/friends' component={FriendsList} />
-    </Router>
+    </div>
   );
 }
 
