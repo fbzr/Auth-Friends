@@ -4,7 +4,6 @@ import * as yup from 'yup';
 import { TextField, Button, Grid, makeStyles, Paper, Typography, InputAdornment, IconButton, CircularProgress } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     root: {

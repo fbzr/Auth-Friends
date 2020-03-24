@@ -1,9 +1,12 @@
 import React from 'react';
 import { Route, useHistory } from 'react-router-dom';
+// mui
+import { CssBaseline, Grid } from '@material-ui/core';
 // components
 import Login from './components/auth/Login';
 import FriendsList from './components/FriendsList';
 import PrivateRoute from './components/PrivateRoute';
+import Header from './components/Header';
 
 function App() {
   const history = useHistory();
@@ -14,14 +17,16 @@ function App() {
   }
 
   return (
-    <div>
-      App
-      <Route exact path='/login'>
-        <Login handleLogin={handleLogin} />
-      </Route>
-      
-      <PrivateRoute exact path='/friends' component={FriendsList} />
-    </div>
+    <>
+      <CssBaseline />
+      <Grid container direction='column' alignItems='center'>
+        <Header />
+        <Route exact path='/login'>
+          <Login handleLogin={handleLogin} />
+        </Route>
+        <PrivateRoute exact path='/friends' component={FriendsList} />
+      </Grid>
+    </>
   );
 }
 
