@@ -72,7 +72,7 @@ const FriendsList = () => {
             emptyRowsWhenPaging={false}
             components={{
                 Toolbar: props => (
-                    <div style={{ backgroundColor: '#e8eaf5' }}>
+                    <Grid container justify='space-between' style={{ backgroundColor: '#e8eaf5' }}>
                         <MTableToolbar {...props} />
                         <IconButton aria-expanded={addFormExpanded} onClick={handleAddButtonClick} aria-label="Add Friend">
                         { addFormExpanded 
@@ -80,8 +80,11 @@ const FriendsList = () => {
                             : <AddBox /> }
                         </IconButton>
                         <AddFriendForm expanded={addFormExpanded} resetList={setResetList} />
-                    </div>
+                    </Grid>
                 )
+            }}
+            options={{
+                showTitle: false
             }}
             editable={{
                 onRowUpdate: (newData, oldData) =>
