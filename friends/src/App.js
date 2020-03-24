@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 // components
-import Login from './components/Login';
+import Login from './components/auth/Login';
+import FriendsList from './components/FriendsList';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Route exact path='/login'>
         <Login />
       </Route>
+      <Route exact path='/friends' component={FriendsList} />
     </Router>
   );
 }

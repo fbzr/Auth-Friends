@@ -49,12 +49,7 @@ const MuiFormikTextField = ({ label, ...props }) => {
 }
 
 const LoginForm = (props) => {
-    const history = useHistory();
-    if(sessionStorage.getItem('token')) {
-        history.push('/');
-    }
-
-    const { isSubmitting, values, setValues } = props;
+    const { isSubmitting, values, setValues, resetForm, setErrors, setSubmitting } = props;
     const classes = useStyles();
     
     const handleClickShowPassword = () => {
@@ -117,23 +112,22 @@ const Login = withFormik({
             .min(8, 'Password must have at least 8 characters')
             .required('Password required')
     }),
-    handleSubmit: (data, { resetForm, setErrors, setSubmitting, props }) => {
+    handleSubmit: (data, { resetForm, setErrors, setSubmitting }) => {
         const { username, password } = data;
-
+        const body = { username: username, password: password };
         // Log in 
-        axios.post('http://localhost:5000/api/login', { username, password })
+        axios.post('http://localhost:5000/api/login', body)
             .then(res => {
                 setSubmitting(true);
-                const { token } = res.data.payload;
-                
+                const token = JSON.stringify(res.data.payload);
                 resetForm();
                 setSubmitting(false);
-                console.log(token);
-                // props.handleLogin(token);
+                localStorage.setItem('token', token);
             })
             .catch(err => {
                 setSubmitting(false);
-                return setErrors({password: 'Password doesn\'t match'})
+                console.log(err);
+                return setErrors({password: 'Username or Password incorrect. Please see Readme'})
             })
     }
 })(LoginForm)
