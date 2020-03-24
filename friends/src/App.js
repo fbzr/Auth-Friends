@@ -3,6 +3,7 @@ import { Route, useHistory } from 'react-router-dom';
 // components
 import Login from './components/auth/Login';
 import FriendsList from './components/FriendsList';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const history = useHistory();
@@ -18,7 +19,8 @@ function App() {
       <Route exact path='/login'>
         <Login handleLogin={handleLogin} />
       </Route>
-      <Route exact path='/friends' component={FriendsList} />
+      
+      <PrivateRoute exact path='/friends' component={FriendsList} />
     </div>
   );
 }
